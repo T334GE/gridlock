@@ -1,23 +1,12 @@
 import pygame as py
 
+
 class Grid:
-    def __init__(self, width:int, height:int, rect_size:int,
-                 line_width:int=1, corner_radius:int=0,
-                 body_rgb:tuple[int, int, int]=(200, 200, 200),
-                 line_rgb:tuple[int, int, int]=(50, 50, 50)):
-        """
-        Initializes a modular grid system.
-        width: Grid width in pixels
-        height: Grid height in pixels
-        rect_size: Size of each grid cell in pixels
-        line_width: Border thickness in pixels
-        corner_radius: Rounded corner radius in pixels
-        body_rgb: Cell color
-        line_rgb: Grid line color
-        """
+    def __init__(self, width, height, cell_size, line_width=1, corner_radius=0,
+                 body_rgb=(200, 200, 200), line_rgb=(50, 50, 50)):
         self.width = width
         self.height = height
-        self.rect_size = rect_size
+        self.cell_size = cell_size
         self.line_width = line_width
         self.corner_radius = corner_radius
         self.body_rgb = body_rgb
@@ -28,14 +17,14 @@ class Grid:
 
     def create_grid(self):
         """Generates the grid structure."""
-        block_number = 1
-        for y in range(self.height // self.rect_size):
-            row= []
-            for x in range(self.width // self.rect_size):
-                rect = py.Rect(x * self.rect_size, y * self.rect_size,self.rect_size, self.rect_size)
-                row.append({"rect": rect, "block_number": block_number,
+        cell_number = 1
+        for y in range(self.height // self.cell_size):
+            row = []
+            for x in range(self.width // self.cell_size):
+                cell = py.Rect(x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size)
+                row.append({"cell": cell, "cell_number": cell_number,
                             "color": self.body_rgb, "corner_radius": self.corner_radius})
-                block_number += 1
+                cell_number += 1
             self.cells.append(row)
 
     def set_surface(self, surface):
@@ -48,34 +37,38 @@ class Grid:
             for row in self.cells:
                 for cell in row:
                     corner_radius = cell["corner_radius"]
-                    py.draw.rect(self.surface, cell["color"], cell["rect"], border_radius=corner_radius)
-                    py.draw.rect(self.surface, self.line_rgb, cell["rect"], self.line_width, border_radius=self.corner_radius)
+                    py.draw.rect(self.surface, cell["color"], cell["cell"], border_radius=corner_radius)
+                    py.draw.rect(self.surface, self.line_rgb, cell["cell"], self.line_width,
+                                 border_radius=self.corner_radius)
 
-    def update_cell(self, x, y, primary_color = (255, 0, 0), secondary_color = (0, 255, 0)):
-        """Updates a specific cell's color."""
-        if 0 <= y < len(self.cells) and 0 <= x < len(self.cells[y]):
-            self.cells[y][x]["color"] = primary_color
-            self.cells[y][x]["corner_radius"] = self.corner_radius
-            self.draw()
+    def get_info(self, event):
+        """Handles events and returns the block number and (x, y) position of the cell."""
+        x, y = event.pos
+        grid_x = x // self.cell_size
+        grid_y = y // self.cell_size
 
-    def handle_events(self, event, primary_color = (255, 0, 0), secondary_color = (0, 255, 0)):
-        """Handles mouse clicks to change cell colors interactively."""
-        if event.type == py.MOUSEBUTTONUP:
-            x, y = event.pos
-            grid_x = x // self.rect_size
-            grid_y = y // self.rect_size
-            if 0 <= grid_y < len(self.cells) and 0 <= grid_x < len(self.cells[grid_y]):
-                current_color = self.cells[grid_y][grid_x]["color"]
-                new_color = secondary_color if current_color == primary_color else primary_color
-                self.update_cell(grid_x, grid_y, new_color)
+        if 0 <= grid_y < len(self.cells) and 0 <= grid_x < len(self.cells[grid_y]):
+            event_cell = self.cells[grid_y][grid_x]  # Get the entire cell dictionary
+            cell_x, cell_y = event_cell["cell"].topleft  # Exact position of the cell
+            cell_number = event_cell["cell_number"]
+            return {"cell_number": cell_number, "x": cell_x, "y": cell_y}
+        return None  # If out of bounds, return None
 
-    def is_adjacent(self, rect1, rect2):
-        """
-        Determines the spatial relationship between two rectangles.
-        Returns 'is_above', 'is_below', 'is_left', 'is_right', or False.
-        """
-        if rect1.top == rect2.bottom and rect1.left == rect2.left: return 'is_above'
-        elif rect1.bottom == rect2.top and rect1.left == rect2.left:  return 'is_below'
-        elif rect1.right == rect2.left and rect1.top == rect2.top:  return 'is_left'
-        elif rect1.left == rect2.right and rect1.top == rect2.top: return 'is_right'
-        return False
+    def on_cell(self, cell_number):
+        """Finds a cell dictionary using its block number.
+            returns Boolean on index 0, cell dict on 1."""
+        for row in self.cells:
+            for cell in row:
+                if cell["cell_number"] == cell_number:
+                    return True, cell
+        return False  # Return False if not found
+
+    def toggle_cell_color(self, cell_number, primary_color=(0, 0, 0), secondary_color=(255, 0, 0)):
+        """Toggles the color of the cell based on its block number."""
+        cell = self.on_cell(cell_number)
+        if cell:
+            current_color = cell[1]["color"]
+            new_color = secondary_color if current_color == primary_color else primary_color
+            cell[1]["color"] = new_color
+            self.draw()  # Re-draw the grid with the updated color
+
