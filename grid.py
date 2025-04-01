@@ -32,9 +32,9 @@ class Grid:
         for y in range(self.height // self.rect_size):
             row= []
             for x in range(self.width // self.rect_size):
-                rect = py.Rect(x * self.rect_size, y * self.rect_size,
-                               self.rect_size, self.rect_size)
-                row.append({"rect": rect, "block_number": block_number, "color": self.body_rgb})
+                rect = py.Rect(x * self.rect_size, y * self.rect_size,self.rect_size, self.rect_size)
+                row.append({"rect": rect, "block_number": block_number,
+                            "color": self.body_rgb, "corner_radius": self.corner_radius})
                 #print(row) # debug
                 block_number += 1
             self.cells.append(row)
@@ -49,13 +49,15 @@ class Grid:
         if self.surface:
             for row in self.cells:
                 for cell in row:
-                    py.draw.rect(self.surface, cell["color"], cell["rect"])
-                    py.draw.rect(self.surface, self.line_rgb, cell["rect"], self.line_width, self.corner_radius)
+                    corner_radius = cell["corner_radius"]
+                    py.draw.rect(self.surface, cell["color"], cell["rect"], border_radius=corner_radius)
+                    py.draw.rect(self.surface, self.line_rgb, cell["rect"], self.line_width, border_radius=self.corner_radius)
 
     def update_cell(self, x, y, primary_color = (255, 0, 0), secondary_color = (0, 255, 0)):
         """Updates a specific cell's color."""
         if 0 <= y < len(self.cells) and 0 <= x < len(self.cells[y]):
             self.cells[y][x]["color"] = primary_color
+            self.cells[y][x]["corner_radius"] = self.corner_radius
             self.draw()
 
     def handle_events(self, event, primary_color = (255, 0, 0), secondary_color = (0, 255, 0)):
