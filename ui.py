@@ -1,5 +1,6 @@
 import pygame.freetype as freetype
 from pygame.sprite import Sprite
+"""this code is taken from pixelprogramming on github, all credits go to them"""
 
 
 def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
