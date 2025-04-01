@@ -2,15 +2,15 @@ import pygame.freetype as freetype
 from pygame.sprite import Sprite
 
 
-def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
-    font = freetype.SysFont("JetBrains Mono", font_size, bold = True)
+def create_surface_with_text(text, font_size:int or float, text_rgb:tuple[int, int, int], bg_rgb:tuple[int, int, int]):
+    font = freetype.SysFont("JetBrains Mono Regular", font_size, bold = True)
     surface, _ = font.render(text = text, fgcolor= text_rgb, bgcolor=bg_rgb)
     return surface.convert_alpha()
 
 
 class UIElement(Sprite):
     def __init__(self, center_position:tuple[int, int], text:str, font_size:int or float,
-                 bg_rgb, text_rgb:tuple[int, int, int], action=None):
+                 bg_rgb, text_rgb:tuple[int, int, int],text_highlight_rgb:tuple[int, int, int], action=None):
         """ An user interface element that can be added to a surface.
             bg_rgb can be tuple[int, int, int] or False for transparent background
         """
@@ -18,7 +18,7 @@ class UIElement(Sprite):
         default_image = create_surface_with_text(
             text=text, font_size=font_size, text_rgb=text_rgb, bg_rgb=bg_rgb)
         highlighted_image = create_surface_with_text(
-            text=text, font_size=font_size * 1.2, text_rgb=(0, 100, 0), bg_rgb=bg_rgb)
+            text=text, font_size=font_size * 1.2, text_rgb=text_highlight_rgb, bg_rgb=bg_rgb)
         self.images = [default_image, highlighted_image]
         self.rects = [
             default_image.get_rect(center=center_position),
