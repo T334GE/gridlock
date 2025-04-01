@@ -21,10 +21,9 @@ screen = py.display.set_mode((width, height))
 clock = py.time.Clock()
 
 # Grid Setup
-grid_1 = Grid(width=width, height=height, cell_size=100,
+grid_1 = Grid(surface=screen, width=width, height=height, cell_size=100,
               corner_radius=10, body_rgb=black,
               line_rgb=red)
-grid_1.set_surface(screen)
 
 # Game State
 running = True
