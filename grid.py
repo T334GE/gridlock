@@ -2,7 +2,7 @@ import pygame as py
 
 
 class Grid:
-    def __init__(self, width, height, cell_size, line_width=1, corner_radius=0,
+    def __init__(self,surface, width, height, cell_size, line_width=1, corner_radius=0,
                  body_rgb=(200, 200, 200), line_rgb=(50, 50, 50)):
         self.width = width
         self.height = height
@@ -12,7 +12,7 @@ class Grid:
         self.body_rgb = body_rgb
         self.line_rgb = line_rgb
         self.cells = []
-        self.surface = None  # Will be assigned during `set_surface`
+        self.surface = surface  # Will be assigned during `set_surface`
         self.create_grid()
 
     def create_grid(self):
@@ -27,9 +27,6 @@ class Grid:
                 cell_number += 1
             self.cells.append(row)
 
-    def set_surface(self, surface):
-        """Assigns a Pygame surface to draw on."""
-        self.surface = surface
 
     def draw(self):
         """Draws the grid if a surface is set."""
