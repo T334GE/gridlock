@@ -35,10 +35,8 @@ class Grid:
                 rect = py.Rect(x * self.rect_size, y * self.rect_size,self.rect_size, self.rect_size)
                 row.append({"rect": rect, "block_number": block_number,
                             "color": self.body_rgb, "corner_radius": self.corner_radius})
-                #print(row) # debug
                 block_number += 1
             self.cells.append(row)
-            #print(self.cells) # debug
 
     def set_surface(self, surface):
         """Assigns a Pygame surface to draw on."""
@@ -70,3 +68,14 @@ class Grid:
                 current_color = self.cells[grid_y][grid_x]["color"]
                 new_color = secondary_color if current_color == primary_color else primary_color
                 self.update_cell(grid_x, grid_y, new_color)
+
+    def is_adjacent(self, rect1, rect2):
+        """
+        Determines the spatial relationship between two rectangles.
+        Returns 'is_above', 'is_below', 'is_left', 'is_right', or False.
+        """
+        if rect1.top == rect2.bottom and rect1.left == rect2.left: return 'is_above'
+        elif rect1.bottom == rect2.top and rect1.left == rect2.left:  return 'is_below'
+        elif rect1.right == rect2.left and rect1.top == rect2.top:  return 'is_left'
+        elif rect1.left == rect2.right and rect1.top == rect2.top: return 'is_right'
+        return False
