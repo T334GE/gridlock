@@ -21,10 +21,6 @@ class Player(py.sprite.Sprite):
         """Handle keyboard input for movement with turn-based control."""
         keys = py.key.get_pressed()
         moved = False
-        up = Vector2(0, -1)
-        down = Vector2(0, 1)
-        left = Vector2(-1, 0)
-        right = Vector2(1, 0)
         if keys[py.K_w]:
             self.move_to_cell(up)
             moved = True
@@ -41,7 +37,7 @@ class Player(py.sprite.Sprite):
         self.rect.center = self.pos  # Update rect position
 
     @property
-    def current_cell(self): # without setter below this would be read only
+    def current_cell(self): #  read only
         """Returns the rect object of the grid cell the player is currently in."""
         if self.grid is None: return None  # Avoid NoneType errors
         grid_x = self.pos.x // self.grid.cell_size # determine the row via player position
@@ -61,6 +57,10 @@ class Player(py.sprite.Sprite):
             direction: Vector2 with values like (0, -1) == (up), (1, 0) == (right), etc.
         """
         if not self.turn: return False
+        up = Vector2(0, -1)
+        down = Vector2(0, 1)
+        left = Vector2(-1, 0)
+        right = Vector2(1, 0)
         target_pos = self.pos + (direction * self.step_size)# Calculate target position
         grid_x = int(target_pos.x // self.grid.cell_size)# Convert to grid coordinates
         grid_y = int(target_pos.y // self.grid.cell_size)
