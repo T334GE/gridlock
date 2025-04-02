@@ -8,7 +8,7 @@ def create_surface_with_text(text, font_size:int or float, text_rgb:tuple[int, i
     return surface.convert_alpha()
 
 
-class UIElement(Sprite):
+class Text_Button(Sprite):
     def __init__(self, center_position:tuple[int, int], text:str, font_size:int or float,
                  bg_rgb, text_rgb:tuple[int, int, int],text_highlight_rgb:tuple[int, int, int], action=None):
         """ An user interface element that can be added to a surface.
@@ -42,3 +42,4 @@ class UIElement(Sprite):
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+
