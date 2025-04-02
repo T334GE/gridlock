@@ -78,3 +78,4 @@ class Grid:
                              else primary_color)
             self.draw_cell(cell)
             py.display.update(cell["rect"])
+
