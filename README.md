@@ -1,2 +1,2 @@
-Turn-Based top down RPG work in progress.
+Turn-Based top down Sci-Fi RPG work in progress.
 Hobby and learning project.
