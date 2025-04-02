@@ -4,80 +4,78 @@ from scripts.grid import *
 from scripts.classes import *
 from scripts.mydict import *
 
-# Initialize Pygame
+# initialization
 py.init()
 py.mixer.init()
 
-# Load Music
+# load Music
 music = py.mixer.music
 music.load("assets/sounds/music.mp3")
 music.set_volume(0.5)
 
-# Screen Settings
+# screen Settings
 width, height = 1000, 1000
 screen = py.display.set_mode((width, height))
 title_img = py.image.load("assets/img/title.png")
 clock = py.time.Clock()
 
-# Grid Setup
+# grid Setup
 grid_1 = Grid(surface=screen, width=width, height=height, cell_size=50,
               corner_radius=8, body_rgb=black,
               line_rgb=green)
 
-# Game State
+# game State
 running = True
 game_started = False
 paused = False
 
-# Create Player
+# create entities
 player = Player(15, color=white, pos=Vector2(25, 25),grid=grid_1,step_size=grid_1.cell_size)
 all_sprites = py.sprite.Group(player)
 
 
 def start_game():
     """In-game loop"""
-    global game_started, running, paused
-    game_started = True  # Switch to game screen
+    global game_started, running, paused, grid_1
+    game_started = True  # switch to game screen
     paused = False
-    last_cell = None  # Track the last cell player stood on
-
+    last_cell = None  # track the last cell player stood on
     while game_started and running:
         try:
-            # Handle events in game
             for event in py.event.get():
                 if event.type == py.QUIT:
                     running = False
                     game_started = False
                 elif event.type == py.KEYDOWN and event.key == py.K_ESCAPE:
                     pause_game()  # Toggle pause state
+                elif event.type == py.MOUSEBUTTONDOWN:
+                    mouse_pos = py.mouse.get_pos()
+                    target_cell = grid_1.get_this_cell(mouse_pos)
+                    print(player.find_path(target_cell)) # debug
+
             screen.fill(black)
             grid_1.draw()
             if not paused:
                 mouse_pos = py.mouse.get_pos()
                 player_cell = grid_1.get_this_cell(player.pos)
-                target_cell = grid_1.get_this_cell(mouse_pos)
                 if last_cell and last_cell != player_cell: # reset color of cell if player left it
                     last_cell["color"] = grid_1.body_rgb  # original color
                     grid_1.draw_cell(last_cell)
                     py.display.update(last_cell["rect"])
                 if player_cell:
-                    player_cell["color"] = green  # Highlight color
-                    grid_1.draw_cell(player_cell)# Highlight the cell
-                    last_cell = player_cell  # Update the last cell
+                    player_cell["color"] = green  # highlight color
+                    grid_1.draw_cell(player_cell)# highlight the cell
+                    last_cell = player_cell  # update the last cell
                 if player.turn:
                     player.handle_input()
                 elif not player.turn:
-                    py.time.delay(500)  # Simulate enemy/AI turn
-                    player.turn = True  # Give control back to player
-
-                all_sprites.update(screen) # Update and draw sprites
-            else: # Draw pause screen
-                pause_text = py.font.SysFont('JetBrains Mono Regular', 72).render("PAUSED", True, white)
-                screen.blit(pause_text, (width // 2 - pause_text.get_width() // 2,
-                                         height // 2 - pause_text.get_height() // 2))
-
-                # Draw pause menu buttons
-                for button in pause_menu_buttons:
+                    py.time.delay(500)  # simulate enemy/AI turn
+                    player.turn = True  # give control back to player
+                all_sprites.update(screen) # update and draw sprites
+            else: # draw pause screen
+                pause_text = py.font.SysFont('JetBrains Mono Regular', 60).render("PAUSED", True, white)
+                screen.blit(pause_text, (width // 2 - pause_text.get_width() // 2, height // 2 - pause_text.get_height() // 2))
+                for button in pause_menu_buttons: # draw pause menu buttons
                     mouse_pos = py.mouse.get_pos()
                     mouse_up = False
                     for event in py.event.get():
@@ -88,19 +86,19 @@ def start_game():
                     if action:
                         action()
                     button.draw(screen)
-            py.display.flip() # Refresh screen
-            clock.tick(60)  # Limit FPS
+            py.display.flip() # refresh screen
+            clock.tick(60)  # limit FPS
         except Exception as e:
             print("Error in game loop:", e)
             time.sleep(1)
 
 def load_game():
     """Load game state and start game loop"""
-    print("Load game (Placeholder)")  # Placeholder function
+    print("Load game (Placeholder)")  # placeholder function
 
 def pause_game():
     global paused
-    paused = not paused  # Toggle pause state
+    paused = not paused  # toggle pause state
 
 
 def exit_game():
@@ -126,7 +124,7 @@ pause_menu_buttons = [
 def main():
     """Main menu loop"""
     global game_started, running, paused
-    py.mixer.music.play(-1)  # Play background music
+    py.mixer.music.play(-1)  # play background music
     while running:
         try:
             screen.fill(black)
