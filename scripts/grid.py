@@ -1,4 +1,5 @@
 import pygame as py
+from pygame import Vector2
 
 
 class Grid:
@@ -50,27 +51,23 @@ class Grid:
             py.draw.rect(self.surface, self.line_rgb, cell["rect"],
                          self.line_width, border_radius=self.corner_radius)
 
-    def get_cell(self, cell_rect):
-        """Finds a cell dictionary using its Rect object.
-           Returns the cell dictionary if found, otherwise returns None."""
-        for row in self.cells:
-            for cell in row:
-                if cell["rect"] == cell_rect:
-                    return cell
-        return None
-
-    def get_this_cell(self, position:tuple[int, int]):
+    def get_this_cell(self, position:Vector2):
         """Returns the cell on parsed position.
-           Returns None if no cell."""
+            Detected through pygame rect.collidepoint with position.
+           Returns None if no cell.
+           """
         for row in self.cells:
             for cell in row:
                 if cell["rect"].collidepoint(position):
                     return cell
         return None
 
-    def toggle_cell_color(self, cell_rect, primary_color=(0, 0, 0),secondary_color=(20, 100, 20)):
+    def toggle_cell_color(
+            self, position:Vector2,
+            primary_color=(0, 0, 0),
+            secondary_color=(20, 100, 20)):
         """Toggles the color of a cell and redraws only that cell."""
-        cell = self.get_cell(cell_rect)
+        cell = self.get_this_cell(position)
         if cell:
             current_color = cell["color"]
             cell["color"] = (secondary_color
