@@ -11,7 +11,7 @@ py.mixer.init()
 # load Music
 music = py.mixer.music
 music.load("assets/sounds/music.mp3")
-music.set_volume(0.5)
+music.set_volume(0.25)
 
 # screen Settings
 width, height = 1000, 1000
@@ -50,13 +50,14 @@ def start_game():
                     pause_game()  # Toggle pause state
                 elif event.type == py.MOUSEBUTTONDOWN:
                     mouse_pos = py.mouse.get_pos()
-                    target_cell = grid_1.get_this_cell(mouse_pos)
+                    target_cell = grid_1.get_this_cell(Vector2(mouse_pos))
                     print(player.find_path(target_cell)) # debug
 
             screen.fill(black)
             grid_1.draw()
             if not paused:
                 mouse_pos = py.mouse.get_pos()
+
                 player_cell = grid_1.get_this_cell(player.pos)
                 if last_cell and last_cell != player_cell: # reset color of cell if player left it
                     last_cell["color"] = grid_1.body_rgb  # original color
@@ -64,14 +65,17 @@ def start_game():
                     py.display.update(last_cell["rect"])
                 if player_cell:
                     player_cell["color"] = green  # highlight color
-                    grid_1.draw_cell(player_cell)# highlight the cell
+                    grid_1.draw_cell(player_cell) # highlight the cell
                     last_cell = player_cell  # update the last cell
+
                 if player.turn:
                     player.handle_input()
+                    print(player_cell)
                 elif not player.turn:
                     py.time.delay(500)  # simulate enemy/AI turn
                     player.turn = True  # give control back to player
                 all_sprites.update(screen) # update and draw sprites
+
             else: # draw pause screen
                 pause_text = py.font.SysFont('JetBrains Mono Regular', 60).render("PAUSED", True, white)
                 screen.blit(pause_text, (width // 2 - pause_text.get_width() // 2, height // 2 - pause_text.get_height() // 2))
@@ -122,9 +126,9 @@ pause_menu_buttons = [
 ]
 
 def main():
-    """Main menu loop"""
+    """Main menu loop handling game states eg. started game, pause screen etc"""
     global game_started, running, paused
-    py.mixer.music.play(-1)  # play background music
+    music.play(-1)  # play background music
     while running:
         try:
             screen.fill(black)
