@@ -3,8 +3,16 @@ from pygame.math import Vector2
 
 
 class Player(py.sprite.Sprite):
-    """Player class for turn based top down movement."""
-    def __init__(self, radius: int, color: tuple[int, int, int], pos: Vector2, step_size: int = 100, grid=None):
+    """Player class for turn-based top down movement.
+        Can parse a grid to move the player on.
+    """
+    def __init__(
+            self,
+            radius: int,
+            color: tuple[int, int, int],
+            pos: Vector2,
+            step_size: int = 100,
+            grid=None):
         super().__init__()
         self.radius = radius
         self.color = color
@@ -12,7 +20,7 @@ class Player(py.sprite.Sprite):
         self.step_size = step_size
         self.turn = True  # track if it's the player's turn
         self.grid = grid  # reference to the movement grid
-        #self.current_cell = none
+        #self.current_cell = none # redundant ?
         self.image = py.Surface((self.radius * 2, self.radius * 2), py.SRCALPHA) # create player's image with transparency
         py.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
         self.rect = self.image.get_rect(center=self.pos)# Set rect for positioning
@@ -41,14 +49,14 @@ class Player(py.sprite.Sprite):
         self.rect.center = self.pos  # update rect position
 
     @property
-    def current_cell(self): # without setter below this would be read only
+    def current_cell(self):
         """Returns the rect object of the grid cell the player is currently in."""
         if self.grid is None: return None  # avoid NoneType errors
         grid_x = self.pos.x // self.grid.cell_size # determine the row via player position
         grid_y = self.pos.y // self.grid.cell_size
         if (0 <= grid_y < len(self.grid.cells) # checks if row is valid in index range
             and 0 <= grid_x < len(self.grid.cells[grid_y])): # check if column is valid
-            return self.grid.cells[grid_y][grid_x]["rect"] # return rect object if all valid
+            return self.grid.cells[grid_y][grid_x]["rect"] # return cell rect object if all valid
         return None # in case if conditions fail
 
     def find_path(self, target_cell):
@@ -69,8 +77,7 @@ class Player(py.sprite.Sprite):
             if (0 <= grid_y < len(self.grid.cells) # add cell to path if valid
                 and 0 <= grid_x < len(self.grid.cells[grid_y])):
                 cell_rect = self.grid.cells[grid_y][grid_x]["rect"]
-                if cell_rect not in path:
-                    path.append(cell_rect)
+                if cell_rect not in path: path.append(cell_rect) # add only new cells
             current_pos += direction * step_size # move forward
         if target_cell not in path: path.append(target_cell) # force include target cell if missed
         return path
