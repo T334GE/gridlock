@@ -1,4 +1,114 @@
-#: kivy 2.3.1
+#:kivy 2.3.1
+
+
+<TitleScreen>:
+    Label:
+        id: title_name
+        size: self.texture_size
+        text_size: root.width, root.height * 0.75
+        color: "420b10"
+        markup: True
+        bold: True
+        text: "THE GRID"
+        font_size: "120sp"
+        font_family: "Jetbrains Mono"
+        halign: "center"
+        valign: "top"
+
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.4}
+        size_hint_x: 0.2
+        size_hint_y: 0.075
+        font_size: "45sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        id: btnStart
+        text: "start"
+
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.3}
+        size_hint_x: 0.18
+        size_hint_y: 0.070
+        font_size: "40sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        id: btnLoad
+        text: "load"
+        on_release: root.manager.current = "load"
+
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.2}
+        size_hint_x: 0.16
+        size_hint_y: 0.065
+        font_size: "30sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        id: btnOptions
+        text: "options"
+        on_release: root.manager.current = "options"
+
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
+        size_hint_x: 0.14
+        size_hint_y: 0.060
+        font_size: "20sp"
+        background_color: [5,0,0,0]
+        color: "420b10"
+        id: btnExit
+        text: "exit"
+        on_release: app.stop()
+
+
+<SaveScreen>:
+    Label:
+        id: save_title
+        size: self.texture_size
+        text_size: root.width, root.height * 0.9
+        color: "420b10"
+        markup: True
+        bold: True
+        text: "save states here"
+        font_size: "50sp"
+        font_family: "Jetbrains Mono"
+        halign: "center"
+        valign: "top"
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
+        size_hint_x: 0.14
+        size_hint_y: 0.060
+        font_size: "20sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        id: btnBack
+        text: "back"
+        on_release: root.manager.current = "title"
+
+
+<OptionsScreen>:
+    Label:
+        id: load_title
+        size: self.texture_size
+        text_size: root.width, root.height * 0.9
+        color: "420b10"
+        markup: True
+        bold: True
+        text: "options menu here"
+        font_size: "50sp"
+        font_family: "Jetbrains Mono"
+        halign: "center"
+        valign: "top"
+
+    Button:
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
+        size_hint_x: 0.14
+        size_hint_y: 0.060
+        font_size: "20sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        id: btnBack
+        text: "back"
+        on_release: root.manager.current = "title"
+
 
 <Manager>:
     id: screen_manager
@@ -18,75 +128,4 @@
         manager: screen_manager
 
 
-<TitleScreen>:
-    id: title_screen
-    Label:
-        id: title_name
-        size: self.texture_size
-        text_size: root.width, root.height * 0.75
-        color: "420b10"
-        markup: True
-        bold: True
-        text: "The Grid"
-        font_size: "120sp"
-        font_family: "Jetbrains Mono"
-        halign: "center"
-        valign: "top"
 
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.4}
-        size_hint_x: 0.16
-        size_hint_y: 0.075
-        background_color: [5,0,0,0.3]
-        id: btnStart
-        text: "start"
-
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.3}
-        size_hint_x: 0.14
-        size_hint_y: 0.070
-        background_color: [5,0,0,0.3]
-        id: btnLoad
-        text: "load"
-        on_release: root.manager.current = "load"
-
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.2}
-        size_hint_x: 0.12
-        size_hint_y: 0.065
-        background_color: [5,0,0,0.3]
-        id: btnOptions
-        text: "options"
-        on_release: root.manager.current = "options"
-
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
-        size_hint_x: 0.10
-        size_hint_y: 0.060
-        background_color: [5,0,0,0.3]
-        id: btnExit
-        text: "exit"
-        on_release: app.stop()
-
-
-<SaveScreen>:
-    id: save_screen
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
-        size_hint_x: 0.14
-        size_hint_y: 0.060
-        background_color: [5,0,0,0.3]
-        id: btnBack
-        text: "back"
-        on_release: root.manager.current = "title"
-
-<OptionsScreen>:
-    id: options_screen
-    Button:
-        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
-        size_hint_x: 0.14
-        size_hint_y: 0.060
-        background_color: [5,0,0,0.3]
-        id: btnBack
-        text: "back"
-        on_release: root.manager.current = "title"
