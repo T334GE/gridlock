@@ -1,6 +1,6 @@
 """Dictionary collection"""
 
-RGBA = {
+RGB = {
     "transparent": [0,0,0],
     "black": [0,0,0],
     "brown": [165,60,60],
