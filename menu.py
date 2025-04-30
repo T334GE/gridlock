@@ -26,5 +26,8 @@ class SaveScreen(Screen):
 class OptionsScreen(Screen):
     """Options screen"""
 
+class GameScreen(Screen):
+    """In-game screen"""
+
 if __name__ == "__main__":
     MenuApp().run()

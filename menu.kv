@@ -24,6 +24,7 @@
         background_color: [0,0,0,0]
         color: "420b10"
         text: "start"
+        on_release: root.manager.current = "game"
 
     Button:
         id: btnLoad
@@ -110,6 +111,31 @@
         on_release: root.manager.current = "title"
 
 
+<GameScreen>:
+    Label:
+        id: game_label
+        size: self.texture_size
+        text_size: root.width, root.height * 0.9
+        color: "420b10"
+        markup: True
+        bold: True
+        text: "very gameplay, much fun"
+        font_size: "50sp"
+        font_family: "Jetbrains Mono"
+        halign: "center"
+        valign: "top"
+
+    Button:
+        id: btnBack
+        pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
+        size_hint_x: 0.14
+        size_hint_y: 0.060
+        font_size: "20sp"
+        background_color: [0,0,0,0]
+        color: "420b10"
+        text: "back"
+        on_release: root.manager.current = "title"
+
 <Manager>:
     id: screen_manager
     TitleScreen:
@@ -127,5 +153,8 @@
         name: "options"
         manager: screen_manager
 
-
+    GameScreen:
+        id: game_screen
+        name: "game"
+        manager: screen_manager
 
