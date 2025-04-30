@@ -16,45 +16,45 @@
         valign: "top"
 
     Button:
+        id: btnStart
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.4}
         size_hint_x: 0.2
         size_hint_y: 0.075
         font_size: "45sp"
         background_color: [0,0,0,0]
         color: "420b10"
-        id: btnStart
         text: "start"
 
     Button:
+        id: btnLoad
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.3}
         size_hint_x: 0.18
         size_hint_y: 0.070
         font_size: "40sp"
         background_color: [0,0,0,0]
         color: "420b10"
-        id: btnLoad
         text: "load"
         on_release: root.manager.current = "load"
 
     Button:
+        id: btnOptions
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.2}
         size_hint_x: 0.16
         size_hint_y: 0.065
         font_size: "30sp"
         background_color: [0,0,0,0]
         color: "420b10"
-        id: btnOptions
         text: "options"
         on_release: root.manager.current = "options"
 
     Button:
+        id: btnExit
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
         size_hint_x: 0.14
         size_hint_y: 0.060
         font_size: "20sp"
         background_color: [5,0,0,0]
         color: "420b10"
-        id: btnExit
         text: "exit"
         on_release: app.stop()
 
@@ -73,13 +73,13 @@
         halign: "center"
         valign: "top"
     Button:
+        id: btnBack
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
         size_hint_x: 0.14
         size_hint_y: 0.060
         font_size: "20sp"
         background_color: [0,0,0,0]
         color: "420b10"
-        id: btnBack
         text: "back"
         on_release: root.manager.current = "title"
 
@@ -99,13 +99,13 @@
         valign: "top"
 
     Button:
+        id: btnBack
         pos_hint: {"x": 0.5 - self.size_hint_x / 2, "y": 0.1}
         size_hint_x: 0.14
         size_hint_y: 0.060
         font_size: "20sp"
         background_color: [0,0,0,0]
         color: "420b10"
-        id: btnBack
         text: "back"
         on_release: root.manager.current = "title"
 

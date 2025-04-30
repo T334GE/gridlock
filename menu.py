@@ -17,7 +17,6 @@ class Manager(ScreenManager):
     def __init__(self, **kwargs):
         super(Manager, self).__init__(**kwargs)
 
-
 class TitleScreen(Screen):
     """Title Screen"""
 
