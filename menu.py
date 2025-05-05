@@ -2,6 +2,7 @@ from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
+from kivy.core.audio import SoundLoader
 import kivy
 
 kivy.require("2.3.1")
@@ -9,8 +10,24 @@ kivy.require("2.3.1")
 
 class MenuApp(MDApp):
     """Main Application"""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # load up title music and start it up
+        self.title_music = SoundLoader.load("assets/sounds/music.mp3")
+        self.play_music()
+
+    def play_music(self, *args):
+        if self.title_music:
+            self.title_music.play()
+
+    def stop_music(self, *args):
+        if self.title_music:
+            self.title_music.stop()
+
     def build(self):
         """Setup of the app"""
+        # set default theme and colors
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Gray"
         # register custom font
