@@ -1,0 +1,130 @@
+#:kivy 2.3.1
+
+<TitleScreen>:
+    id: title_screen
+    name: "title"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(5)
+        padding: dp(20)
+        MDLabel:
+            id: title_label
+            text: "grid lock"
+            font_style: "H1"
+            halign: "center"
+            valign: "top"
+            theme_text_color: "Custom"
+            text_color: "red"
+
+        MDRoundFlatIconButton:
+            id: start_button
+            text: "start"
+            icon: "play"
+            line_color: [0,0,0,0]
+            font_style: "H4"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "game"
+
+        MDRoundFlatIconButton:
+            id: load_button
+            text: "load"
+            icon: "content-save"
+            line_color: [0,0,0,0]
+            font_style: "H5"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "load"
+
+        MDRoundFlatIconButton:
+            id: options_button
+            text: "options"
+            icon: "cog"
+            line_color: [0,0,0,0]
+            font_size: "20sp"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "options"
+
+        MDRoundFlatIconButton:
+            id: exit_button
+            text: "exit"
+            icon: "location-exit"
+            line_color: [0,0,0,0]
+            font_size: "20sp"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.stop()
+
+<SaveScreen>:
+    id: save_screen
+    name: "load"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(20)
+        padding: dp(20)
+        MDLabel:
+            id: save_label
+            text: "Save states here"
+            font_style: "H2"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: (1, 0, 0, 1)
+
+        MDRoundFlatIconButton:
+            id: back_button
+            text: "back"
+            icon: "undo"
+            line_color: [0,0,0,0]
+            font_size: "20sp"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "title"
+
+<OptionsScreen>:
+    id: options_screen
+    name: "options"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(20)
+        padding: dp(20)
+
+        MDLabel:
+            id: options_label
+            text: "Options menu here"
+            font_style: "H2"
+            halign: "center"
+
+        MDRoundFlatIconButton:
+            id: back_button
+            text: "back"
+            icon: "undo"
+            line_color: [0,0,0,0]
+            font_size: "20sp"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "title"
+
+<GameScreen>:
+    id: game_screen
+    name: "game"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(20)
+        padding: dp(20)
+
+        MDLabel:
+            id: game_label
+            text: "Very gameplay, much fun"
+            font_style: "H2"
+            halign: "center"
+
+        MDRoundFlatIconButton:
+            id: back_button
+            text: "back"
+            icon: "undo"
+            line_color: [0,0,0,0]
+            font_size: "20sp"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "title"
+
+<Manager>:
+    id: screen_manager
+    TitleScreen:
+    SaveScreen:
+    OptionsScreen:
+    GameScreen:
