@@ -10,21 +10,19 @@ kivy.require("2.3.1")
 
 class MenuApp(MDApp):
     """Main Application"""
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # load up title music and start it up
         self.title_music = SoundLoader.load("assets/sounds/music.mp3")
         self.play_music()
-
     def play_music(self, *args):
-        if self.title_music:
+        if self.title_music and self.title_music.state == "stop":
+            self.title_music.volume = 0.35
+            self.title_music.loop = True
             self.title_music.play()
-
     def stop_music(self, *args):
-        if self.title_music:
+        if self.title_music and self.title_music.state == "play":
             self.title_music.stop()
-
     def build(self):
         """Setup of the app"""
         # set default theme and colors

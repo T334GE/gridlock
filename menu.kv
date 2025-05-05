@@ -1,5 +1,13 @@
 #:kivy 2.3.1
 
+<Manager>:
+    id: screen_manager
+    TitleScreen:
+    SaveScreen:
+    OptionsScreen:
+    GameScreen:
+
+
 <TitleScreen>:
     id: title_screen
     name: "title"
@@ -11,7 +19,6 @@
         orientation: "vertical"
         spacing: dp(5)
         padding: dp(5)
-
         MDRoundFlatIconButton:
             id: start_button
             text: "start"
@@ -19,8 +26,9 @@
             line_color: [0,0,0,0]
             font_style: "H4"
             pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "game"
-
+            on_release:
+                app.stop_music()
+                app.root.current = "game"
         MDRoundFlatIconButton:
             id: load_button
             text: "load"
@@ -29,7 +37,6 @@
             font_style: "H5"
             pos_hint: {"center_x": 0.5}
             on_release: app.root.current = "load"
-
         MDRoundFlatIconButton:
             id: options_button
             text: "options"
@@ -38,7 +45,6 @@
             font_size: "20sp"
             pos_hint: {"center_x": 0.5}
             on_release: app.root.current = "options"
-
         MDRoundFlatIconButton:
             id: exit_button
             text: "exit"
@@ -47,6 +53,7 @@
             font_size: "20sp"
             pos_hint: {"center_x": 0.5}
             on_release: app.stop()
+
 
 <SaveScreen>:
     id: save_screen
@@ -60,9 +67,6 @@
             text: "Save states here"
             font_style: "H2"
             halign: "center"
-            theme_text_color: "Custom"
-            text_color: (1, 0, 0, 1)
-
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
@@ -71,6 +75,7 @@
         font_size: "20sp"
         pos_hint: {"center_x": 0.5}
         on_release: app.root.current = "title"
+
 
 <OptionsScreen>:
     id: options_screen
@@ -84,7 +89,6 @@
             text: "Options menu here"
             font_style: "H2"
             halign: "center"
-
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
@@ -93,6 +97,7 @@
         font_size: "20sp"
         pos_hint: {"center_x": 0.5}
         on_release: app.root.current = "title"
+
 
 <GameScreen>:
     id: game_screen
@@ -104,9 +109,7 @@
             id: options_label
             text: "much gameplay, such fun"
             font_style: "H2"
-            line_color: [0,0,0,1]
             halign: "center"
-
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
@@ -114,11 +117,7 @@
         line_color: [0,0,0,0]
         font_size: "20sp"
         pos_hint: {"center_x": 0.5}
-        on_release: app.root.current = "title"
+        on_release:
+            app.play_music()
+            app.root.current = "title"
 
-<Manager>:
-    id: screen_manager
-    TitleScreen:
-    SaveScreen:
-    OptionsScreen:
-    GameScreen:
