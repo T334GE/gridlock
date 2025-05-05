@@ -10,7 +10,7 @@ kivy.require("2.3.1")
 class MenuApp(MDApp):
     """Main Application"""
     def build(self):
-        # set theme properties
+        """Setup of the app"""
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Gray"
         # register custom font
@@ -20,7 +20,7 @@ class MenuApp(MDApp):
         )
         # change standard font to custom font
         self.theme_cls.font_styles.update({
-            "H1": ["jetbrains", 96, True, 0.15],
+            "H1": ["jetbrains", 90, True, 0.15],
             "H2": ["jetbrains", 60, False, -0.05],
             "H3": ["jetbrains", 48, False, 0],
             "H4": ["jetbrains", 34, False, 0.25],

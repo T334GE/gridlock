@@ -6,7 +6,7 @@
     MDBoxLayout:
         orientation: "vertical"
         spacing: dp(5)
-        padding: dp(20)
+        padding: dp(5)
         MDLabel:
             id: title_label
             text: "grid lock"
@@ -58,7 +58,7 @@
     MDBoxLayout:
         orientation: "vertical"
         spacing: dp(20)
-        padding: dp(20)
+        padding: dp(25)
         MDLabel:
             id: save_label
             text: "Save states here"
@@ -67,60 +67,58 @@
             theme_text_color: "Custom"
             text_color: (1, 0, 0, 1)
 
-        MDRoundFlatIconButton:
-            id: back_button
-            text: "back"
-            icon: "undo"
-            line_color: [0,0,0,0]
-            font_size: "20sp"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "title"
+    MDRoundFlatIconButton:
+        id: back_button
+        text: "back"
+        icon: "undo"
+        line_color: [0,0,0,0]
+        font_size: "20sp"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.root.current = "title"
 
 <OptionsScreen>:
     id: options_screen
     name: "options"
     MDBoxLayout:
         orientation: "vertical"
-        spacing: dp(20)
-        padding: dp(20)
-
+        spacing: dp(5)
+        padding: dp(25)
         MDLabel:
             id: options_label
             text: "Options menu here"
             font_style: "H2"
             halign: "center"
 
-        MDRoundFlatIconButton:
-            id: back_button
-            text: "back"
-            icon: "undo"
-            line_color: [0,0,0,0]
-            font_size: "20sp"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "title"
+    MDRoundFlatIconButton:
+        id: back_button
+        text: "back"
+        icon: "undo"
+        line_color: [0,0,0,0]
+        font_size: "20sp"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.root.current = "title"
 
 <GameScreen>:
     id: game_screen
     name: "game"
     MDBoxLayout:
-        orientation: "vertical"
-        spacing: dp(20)
-        padding: dp(20)
-
+        spacing: dp(5)
+        padding: dp(25)
         MDLabel:
-            id: game_label
-            text: "Very gameplay, much fun"
+            id: options_label
+            text: "much gameplay, such fun"
             font_style: "H2"
+            line_color: [0,0,0,1]
             halign: "center"
 
-        MDRoundFlatIconButton:
-            id: back_button
-            text: "back"
-            icon: "undo"
-            line_color: [0,0,0,0]
-            font_size: "20sp"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "title"
+    MDRoundFlatIconButton:
+        id: back_button
+        text: "back"
+        icon: "undo"
+        line_color: [0,0,0,0]
+        font_size: "20sp"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.root.current = "title"
 
 <Manager>:
     id: screen_manager
