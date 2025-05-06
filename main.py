@@ -1,6 +1,8 @@
 import kivy
 from kivy.core.text import LabelBase
+from kivy.uix.button import Button
 from kivymd.app import MDApp
+from kivymd.uix.button import MDIconButton
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from kivy.core.audio import SoundLoader
@@ -12,17 +14,25 @@ class GameApp(MDApp):
     """Main Application"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # load up title music and start it up
+        # load up title music
         self.title_music = SoundLoader.load("assets/sounds/music.mp3")
+
+    def on_start(self):
+        """Called after the root has been built"""
         self.play_music()
+        # get the in game window in which the gameplay takes place
+        game_box = self.root.get_screen("game").ids.game_box
+
     def play_music(self, *args):
         if self.title_music and self.title_music.state == "stop":
             self.title_music.volume = 0.25
             self.title_music.loop = True
             self.title_music.play()
+
     def stop_music(self, *args):
         if self.title_music and self.title_music.state == "play":
             self.title_music.stop()
+
     def build(self):
         """Setup of the app"""
         # set default theme and colors
@@ -75,9 +85,7 @@ class OptionsScreen(MDScreen):
 
 class GameScreen(MDScreen):
     """In-game screen"""
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
+    pass
 
 if __name__ == "__main__":
     GameApp().run()
