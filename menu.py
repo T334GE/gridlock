@@ -1,14 +1,14 @@
+import kivy
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from kivy.core.audio import SoundLoader
-import kivy
 
 kivy.require("2.3.1")
 
 
-class MenuApp(MDApp):
+class GameApp(MDApp):
     """Main Application"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -17,7 +17,7 @@ class MenuApp(MDApp):
         self.play_music()
     def play_music(self, *args):
         if self.title_music and self.title_music.state == "stop":
-            self.title_music.volume = 0.35
+            self.title_music.volume = 0.25
             self.title_music.loop = True
             self.title_music.play()
     def stop_music(self, *args):
@@ -75,8 +75,9 @@ class OptionsScreen(MDScreen):
 
 class GameScreen(MDScreen):
     """In-game screen"""
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 
 if __name__ == "__main__":
-    MenuApp().run()
+    GameApp().run()

@@ -105,11 +105,18 @@
     MDBoxLayout:
         spacing: dp(5)
         padding: dp(25)
-        MDLabel:
-            id: options_label
-            text: "much gameplay, such fun"
-            font_style: "H2"
+        line_color: [1,0,0,1]
+        MDGridLayout:
+            id: map_grid
             halign: "center"
+            valign: "center"
+            rows: 8
+            cols: 8
+            line_color: [1,0,0,1]
+            MDIconButton:
+                icon: "skull"
+                line_color: [1,0,0,1]
+
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
