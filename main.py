@@ -1,8 +1,6 @@
 import kivy
 from kivy.core.text import LabelBase
-from kivy.uix.button import Button
 from kivymd.app import MDApp
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from kivy.core.audio import SoundLoader
@@ -21,7 +19,7 @@ class GameApp(MDApp):
         """Called after the root has been built"""
         self.play_music()
         # get the in game window in which the gameplay takes place
-        game_box = self.root.get_screen("game").ids.game_box
+        game_container = self.root.get_screen("game").ids.game_container
 
     def play_music(self, *args):
         if self.title_music and self.title_music.state == "stop":

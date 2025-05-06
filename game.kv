@@ -11,10 +11,9 @@
 <TitleScreen>:
     id: title_screen
     name: "title"
-    Image:
+    FitImage:
         id: title_image
         source: "assets/img/placeholder.png"
-        fit_mode: "contain"
     MDBoxLayout:
         orientation: "vertical"
         spacing: dp(5)
@@ -25,7 +24,7 @@
             icon: "play"
             line_color: [0,0,0,0]
             font_style: "H4"
-            pos_hint: {"center_x": 0.5}
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
             on_release:
                 app.stop_music()
                 app.root.current = "game"
@@ -103,10 +102,9 @@
     id: game_screen
     name: "game"
     MDBoxLayout:
-        id: game_box
+        id: game_container
         padding: dp(20)
         line_color: [1,0,0,1]
-
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
