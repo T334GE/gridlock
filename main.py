@@ -2,6 +2,7 @@ import kivy
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
 from kivymd.uix.button import MDIconButton
+from kivymd.uix.label import MDLabel
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from kivy.core.audio import SoundLoader
@@ -21,9 +22,9 @@ class GameApp(MDApp):
         self.play_music()
         # get the in game window in which the gameplay takes place
         game_container = self.root.get_screen("game").ids.game_container
-        # this where my game would go...if I had one
+        # add game to window
         game_container.add_widget(
-            MDIconButton(icon="skull", valign="center", halign="center")
+            MDLabel(text="this where my game would go...if I had one", valign="center", halign="center")
         )
 
     def play_music(self, *args):
