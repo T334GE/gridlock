@@ -35,7 +35,7 @@
             line_color: [0,0,0,0]
             font_style: "H5"
             pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "load"
+            on_release: app.root.current = "save"
         MDRoundFlatIconButton:
             id: options_button
             text: "options"
@@ -56,16 +56,12 @@
 
 <SaveScreen>:
     id: save_screen
-    name: "load"
+    name: "save"
     MDBoxLayout:
+        id: save_container
         orientation: "vertical"
         spacing: dp(20)
         padding: dp(25)
-        MDLabel:
-            id: save_label
-            text: "Save states here"
-            font_style: "H2"
-            halign: "center"
     MDRoundFlatIconButton:
         id: back_button
         text: "back"
@@ -80,14 +76,10 @@
     id: options_screen
     name: "options"
     MDBoxLayout:
+        id: options_container
         orientation: "vertical"
         spacing: dp(5)
         padding: dp(25)
-        MDLabel:
-            id: options_label
-            text: "Options menu here"
-            font_style: "H2"
-            halign: "center"
     MDRoundFlatIconButton:
         id: back_button
         text: "back"

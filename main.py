@@ -1,7 +1,6 @@
 import kivy
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
@@ -20,11 +19,19 @@ class GameApp(MDApp):
     def on_start(self):
         """Called after the root has been built"""
         self.play_music()
-        # get the in game window in which the gameplay takes place
+        # save windows for injecting widgets
         game_container = self.root.get_screen("game").ids.game_container
+        save_container = self.root.get_screen("save").ids.save_container
+        options_container = self.root.get_screen("options").ids.options_container
         # add game to window
         game_container.add_widget(
-            MDLabel(text="this where my game would go...if I had one", valign="center", halign="center")
+            MDLabel(text="this where my game would go...if I had one",  font_style="H4", halign="center")
+        )
+        save_container.add_widget(
+            MDLabel(text="save states and stuff",  font_style="H4", halign="center")
+        )
+        options_container.add_widget(
+            MDLabel(text="options kinda depend on a working game", font_style="H4", halign="center")
         )
 
     def play_music(self, *args):
