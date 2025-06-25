@@ -1,12 +1,10 @@
-import kivy
+import kivy, pytmx
 from kivy.core.text import LabelBase
 from kivymd.app import MDApp
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from kivy.core.audio import SoundLoader
-
 kivy.require("2.3.1")
 
 
@@ -16,6 +14,7 @@ class GameApp(MDApp):
         super().__init__(**kwargs)
         # load up title music
         self.title_music = SoundLoader.load("assets/sounds/music.mp3")
+        self.mapdata = pytmx.TiledMap("assets/sewers.tmx")
 
     def on_start(self):
         """Called after the root has been built"""
@@ -38,7 +37,8 @@ class GameApp(MDApp):
             self.title_music.stop()
 
     def build(self):
-        """Setup of the app"""
+        """Setup of the app, calls itself on call of App.
+        Some stuff needs to be defined after build is done."""
         # set default theme and colors
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Gray"
