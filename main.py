@@ -1,6 +1,8 @@
-import kivy, pytmx
+import kivy
 from kivy.core.text import LabelBase
+from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
+from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
@@ -14,7 +16,6 @@ class GameApp(MDApp):
         super().__init__(**kwargs)
         # load up title music
         self.title_music = SoundLoader.load("assets/sounds/music.mp3")
-        self.mapdata = pytmx.TiledMap("assets/sewers.tmx")
 
     def on_start(self):
         """Called after the root has been built"""
@@ -24,9 +25,7 @@ class GameApp(MDApp):
         save_container = self.root.get_screen("save").ids.save_container
         options_container = self.root.get_screen("options").ids.options_container
         # add game to window
-        game_container.add_widget(
-            MDLabel(text="this where my game would go...if I had one",  font_style="H4", halign="center")
-        )
+
         save_container.add_widget(
             MDLabel(text="save states and stuff",  font_style="H4", halign="center")
         )
