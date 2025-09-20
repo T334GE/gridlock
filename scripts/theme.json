@@ -14,7 +14,12 @@
     {
       "shape": "rounded_rectangle",
       "shape_corner_radius": "3",
-      "border_width": "1"
+      "border_width": "1",
+      "font": {
+        "name": "assets/fonts/JetBrainsMono-Regular.ttf",
+        "size": 100,
+        "regular_path": "assets/fonts/JetBrainsMono-Regular.ttf"
+      }
     }
   }
 }
