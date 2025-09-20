@@ -6,7 +6,7 @@
       "normal_border": "Red",
       "normal_bg": "Black",
       "normal_text": "White",
-      "hovered_border": "Black",
+      "hovered_border": "#00000000",
       "hovered_bg": "Red",
       "hovered_text": "Yellow"
     },
