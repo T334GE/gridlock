@@ -15,6 +15,18 @@ class Game:
         
         self.__font = py.font.Font("assets/fonts/JetBrainsMono-Regular.ttf", 60)
         self.__is_running:bool = True
+        self.__start_button = pygui.elements.UIButton(
+            py.Rect(0, 350, 75, -1),
+            text="start",
+            anchors={"centerx":"centerx"
+                     }
+        )
+        self.__exit_button = pygui.elements.UIButton(
+            py.Rect(0, 400, 75, -1),
+            text="exit",
+            anchors={"centerx": "centerx"}
+        )
+
 
 
     @property
@@ -33,17 +45,21 @@ class Game:
                     self.__is_running = False
 
                 if event.type == pygui.UI_BUTTON_PRESSED:
-                    pass
+                    if event.ui_element.text == "exit":
+                        self.__is_running = False
 
                 if event.type == py.VIDEORESIZE:
                     self.__screen = py.display.set_mode((event.w, event.h),py.RESIZABLE)
+                    self.__screen_width = event.w
+                    self.__screen_height = event.h
                     
                 self.__manager.process_events(event)
             
             self.__manager.update(self.__time_delta)
+            self.__screen.fill((0,0,0))
             self.__manager.draw_ui(self.__screen)
 
-            py.display.update()
+            py.display.flip()
 
 if __name__ == "__main__":
     Game(

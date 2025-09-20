@@ -4,13 +4,16 @@
     "colors":
     {
       "normal_border": "Red",
-      "normal_background": "Black",
-      "normal_text": "White"
+      "normal_bg": "Black",
+      "normal_text": "White",
+      "hovered_border": "Black",
+      "hovered_bg": "Red",
+      "hovered_text": "Yellow"
     },
     "misc":
     {
       "shape": "rounded_rectangle",
-      "shape_corner_radius": "10",
+      "shape_corner_radius": "3",
       "border_width": "1"
     }
   }
