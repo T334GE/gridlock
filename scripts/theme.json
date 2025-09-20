@@ -1,8 +1,15 @@
 {
-  "button":
-  {
-    "colors":
-    {
+  "defaults": {
+    "misc": {
+      "font": {
+        "name": "JetBrainsMono",
+        "size": "60",
+        "regular_path": "assets/fonts/JetBrainsMono-Regular.ttf"
+      }
+    }
+  },
+  "button": {
+    "colors": {
       "normal_border": "Red",
       "normal_bg": "Black",
       "normal_text": "White",
@@ -10,16 +17,20 @@
       "hovered_bg": "Red",
       "hovered_text": "Yellow"
     },
-    "misc":
-    {
+    "misc": {
       "shape": "rounded_rectangle",
       "shape_corner_radius": "3",
-      "border_width": "1",
-      "font": {
-        "name": "assets/fonts/JetBrainsMono-Regular.ttf",
-        "size": 100,
-        "regular_path": "assets/fonts/JetBrainsMono-Regular.ttf"
-      }
+      "border_width": "1"
+    }
+  },
+  "panel": {
+    "colors": {
+      "dark_bg": "#00000000",
+      "normal_border": "Red"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "border_width": "1"
     }
   }
 }
