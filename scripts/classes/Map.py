@@ -1,12 +1,12 @@
 import pygame as py
 
 class Map:
-    def __init__(self, screen:py.Surface, rows:int, columns:int):
+    def __init__(self, surface:py.Surface, rows:int, columns:int):
         self.rows = rows
         self.columns = columns
-        self.screen = screen
-        self.cell_width = self.screen.get_width() // self.rows
-        self.cell_height = self.screen.get_width() // self.columns
+        self.surface = surface
+        self.cell_width = self.surface.get_width() // self.rows
+        self.cell_height = self.surface.get_width() // self.columns
 
     def draw(self):
         for row in range(self.rows):
@@ -17,4 +17,4 @@ class Map:
                     self.cell_width,
                     self.cell_height,
                 )
-                py.draw.rect(self.screen, (200, 200, 200), rect, 1)
+                py.draw.rect(self.surface, (200, 200, 200), rect, 1)
