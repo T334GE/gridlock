@@ -17,7 +17,7 @@ class Game:
         self.__is_running:bool = True
 
         self.__menu_container = pygui.elements.UIPanel(
-            py.Rect(-1, -1, 200, 500),
+            py.Rect(-1, -1, 200, 300),
             anchors={"center":"center"},
             object_id="main_menu_container"
         )
@@ -39,7 +39,6 @@ class Game:
         )
 
 
-
     @property
     def is_running(self) -> bool:
         return self.__is_running
@@ -56,14 +55,20 @@ class Game:
                     case py.QUIT:
                         self.__is_running = False
 
-                    case pygui.UI_BUTTON_PRESSED:
+                    case pygui.UI_BUTTON_PRESSED: #all ui events in this case
                         if event.ui_element.text == "exit":
                             self.__is_running = False
+
+                    case py.KEYDOWN:# all key events in this case
+                        if event.key == py.K_u:
+                            if not self.__manager.visual_debug_active:
+                                self.__manager.set_visual_debug_mode(True)
+                            else:
+                                self.__manager.set_visual_debug_mode(False)
 
                     case py.VIDEORESIZE:
                         self.__screen = py.display.set_mode((event.w, event.h),py.RESIZABLE)
                         self.__manager.set_window_resolution((event.w, event.h))
-                        self.__menu_container.update(self.__time_delta)
 
                 self.__manager.process_events(event)
 
